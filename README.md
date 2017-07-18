@@ -11,7 +11,7 @@ Footstep is a simple registration attribution tracking solution for Laravel 5.2+
 
 > “I know I waste half of my advertising dollars...I just wish I knew which half.” ~ *Henry Procter*.
 
-Footstep is a fork of the kyranb/Footprints package re-engineered to track one-off events that do not culminate in a user registering or signing in.
+Footstep is a fork of the [kyranb/Footprints](https://github.com/kyranb/Footprints) package re-engineered to track one-off events that do not culminate in a user registering or signing in.
 ## Install
 
 Via Composer
