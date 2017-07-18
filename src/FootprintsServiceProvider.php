@@ -1,8 +1,8 @@
 <?php
 
-namespace Kyranb\Footprints;
+namespace Albofish\Footstep;
 
-use Kyranb\Footprints\Facades\FootprintsFacade;
+use Albofish\Footstep\Facades\FootprintsFacade;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
 

@@ -1,13 +1,13 @@
 <?php
 
-namespace Kyranb\Footprints\Middleware;
+namespace Albofish\Footstep\Middleware;
 
 use Auth;
 use Closure;
 use DB;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Kyranb\Footprints\Visit;
+use Albofish\Footstep\Visit;
 
 class CaptureAttributionDataMiddleware
 {

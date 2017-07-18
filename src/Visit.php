@@ -1,6 +1,6 @@
 <?php
 
-namespace Kyranb\Footprints;
+namespace Albofish\Footstep;
 
 use Cookie;
 use Illuminate\Database\Eloquent\Model;
