@@ -59,7 +59,7 @@ class CaptureAttributionDataMiddleware
         $attributionData = $this->captureAttributionData();
         $cookieToken = $this->findOrCreateTrackingCookieToken();
 
-        if (config('footprints.async') == true) {
+        if (config('footstep.async') == true) {
             $this->asyncTrackVisit($attributionData, $cookieToken);
         }
         else {
@@ -74,7 +74,7 @@ class CaptureAttributionDataMiddleware
      */
     protected function disableOnAuthentication()
     {
-        if (Auth::guard(config('footprints.guard'))->check() && config('footprints.disable_on_authentication')) {
+        if (Auth::guard(config('footstep.guard'))->check() && config('footstep.disable_on_authentication')) {
             return true;
         }
     }
@@ -84,7 +84,7 @@ class CaptureAttributionDataMiddleware
      */
     protected function disableInternalLinks()
     {
-        if (!config('footprints.disable_internal_links')) {
+        if (!config('footstep.disable_internal_links')) {
             return false;
         }
 
@@ -122,8 +122,8 @@ class CaptureAttributionDataMiddleware
     {
         $arr = [];
 
-        if (config('footprints.custom_parameters')) {
-            foreach (config('footprints.custom_parameters') as $parameter) {
+        if (config('footstep.custom_parameters')) {
+            foreach (config('footstep.custom_parameters') as $parameter) {
                 $arr[$parameter] = $this->request->input($parameter);
             }
         }
@@ -255,12 +255,12 @@ class CaptureAttributionDataMiddleware
     {
         $cookieToken = str_random(40);
 
-        if ($this->request->hasCookie(config('footprints.cookie_name'))) {
-            $cookieToken = $this->request->cookie(config('footprints.cookie_name'));
+        if ($this->request->hasCookie(config('footstep.cookie_name'))) {
+            $cookieToken = $this->request->cookie(config('footstep.cookie_name'));
         }
 
         if (method_exists($this->response, "withCookie")) {
-            $this->response->withCookie(cookie(config('footprints.cookie_name'), $cookieToken, config('footprints.attribution_duration'), null, config('footprints.cookie_domain')));
+            $this->response->withCookie(cookie(config('footstep.cookie_name'), $cookieToken, config('footstep.attribution_duration'), null, config('footstep.cookie_domain')));
         }
 
         return $cookieToken;
@@ -273,7 +273,7 @@ class CaptureAttributionDataMiddleware
      */
     protected function disabledLandingPages($landing_page = null)
     {
-        $blacklist = (array)config('footprints.landing_page_blacklist');
+        $blacklist = (array)config('footstep.landing_page_blacklist');
 
         if ($landing_page) {
             

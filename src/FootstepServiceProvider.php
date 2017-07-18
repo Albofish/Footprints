@@ -2,11 +2,11 @@
 
 namespace Albofish\Footstep;
 
-use Albofish\Footstep\Facades\FootprintsFacade;
+use Albofish\Footstep\Facades\FootstepFacade;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
 
-class FootprintsServiceProvider extends ServiceProvider
+class FootstepServiceProvider extends ServiceProvider
 {
     /**
      * Perform post-registration booting of services.
@@ -18,25 +18,25 @@ class FootprintsServiceProvider extends ServiceProvider
     }
 
     /**
-     * Publish Footprints configuration
+     * Publish Footstep configuration
      */
     protected function publishConfig()
     {
         // Publish config files
         $this->publishes([
-            realpath(__DIR__.'/config/footprints.php') => config_path('footprints.php'),
+            realpath(__DIR__.'/config/footstep.php') => config_path('footstep.php'),
         ]);
     }
 
     /**
-     * Publish Footprints migration
+     * Publish Footstep migration
      */
     protected function publishMigration()
     {
-        $published_migration = glob( database_path( '/migrations/*_create_footprints_table.php' ) );
+        $published_migration = glob( database_path( '/migrations/*_create_footstep_table.php' ) );
         if( count( $published_migration ) === 0 ) {
             $this->publishes([
-                __DIR__ . '/database/migrations/migrations.stub' => database_path('/migrations/' . date('Y_m_d_His') . '_create_footprints_table.php'),
+                __DIR__ . '/database/migrations/migrations.stub' => database_path('/migrations/' . date('Y_m_d_His') . '_create_footstep_table.php'),
             ], 'migrations');
         }
     }
@@ -48,18 +48,18 @@ class FootprintsServiceProvider extends ServiceProvider
     {
         // Bring in configuration values
         $this->mergeConfigFrom(
-            __DIR__ . '/config/footprints.php', 'footprints'
+            __DIR__ . '/config/footstep.php', 'footstep'
         );
 
-        $this->app->singleton(Footprints::class, function () {
-            return new Footprints();
+        $this->app->singleton(Footstep::class, function () {
+            return new Footstep();
         });
 
-        // Define alias 'Footprints'
+        // Define alias 'Footstep'
         $this->app->booting(function () {
             $loader = AliasLoader::getInstance();
 
-            $loader->alias('Footprints', FootprintsFacade::class);
+            $loader->alias('Footstep', FootstepFacade::class);
         });
     }
 }

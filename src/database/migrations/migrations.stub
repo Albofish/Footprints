@@ -3,12 +3,12 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFootprintsTable extends Migration
+class CreateFootstepTable extends Migration
 {
 
     private function getConnectionName()
     {
-        return config('footprints.connection_name') ? config('footprints.connection_name') : config('database.default');
+        return config('footstep.connection_name') ? config('footstep.connection_name') : config('database.default');
     }
 
     /**
@@ -18,10 +18,10 @@ class CreateFootprintsTable extends Migration
      */
     public function up()
     {
-        Schema::connection($this->getConnectionName())->create(config('footprints.table_name'), function (Blueprint $table) {
+        Schema::connection($this->getConnectionName())->create(config('footstep.table_name'), function (Blueprint $table) {
             
             $table->increments('id');
-            $table->integer(config('footprints.column_name'))->unsigned()->nullable();
+            $table->integer(config('footstep.column_name'))->unsigned()->nullable();
             $table->string('cookie_token');
             $table->string('landing_domain');
             $table->string('landing_page');
@@ -36,8 +36,8 @@ class CreateFootprintsTable extends Migration
             $table->string('utm_content')->nullable();
             $table->string('referral')->nullable();
             
-            if (config('footprints.custom_parameters')) {
-                foreach (config('footprints.custom_parameters') as $parameter) {
+            if (config('footstep.custom_parameters')) {
+                foreach (config('footstep.custom_parameters') as $parameter) {
                     $table->string($parameter)->nullable();
                 }
             }
@@ -53,6 +53,6 @@ class CreateFootprintsTable extends Migration
      */
     public function down()
     {
-        Schema::connection($this->getConnectionName())->drop(config('footprints.table_name'));
+        Schema::connection($this->getConnectionName())->drop(config('footstep.table_name'));
     }
 }

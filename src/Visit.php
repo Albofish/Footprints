@@ -43,11 +43,11 @@ class Visit extends Model
     {
         parent::__construct($attributes);
 
-        $this->setTable(config('footprints.table_name'));
+        $this->setTable(config('footstep.table_name'));
 
-        if (config('footprints.connection_name')) {
+        if (config('footstep.connection_name')) {
             
-            $this->setConnection(config('footprints.connection_name'));
+            $this->setConnection(config('footstep.connection_name'));
         }
     }
 
@@ -58,9 +58,9 @@ class Visit extends Model
      */
     public function account()
     {
-        $model = config('footprints.model');
+        $model = config('footstep.model');
 
-        return $this->belongsTo($model, config('footprints.column_name'));
+        return $this->belongsTo($model, config('footstep.column_name'));
     }
 
     /**
@@ -70,6 +70,6 @@ class Visit extends Model
      */
     public function scopePreviousVisits($query)
     {
-        return $query->where('cookie_token', Cookie::get(config('footprints.cookie_name')));
+        return $query->where('cookie_token', Cookie::get(config('footstep.cookie_name')));
     }
 }

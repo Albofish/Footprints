@@ -4,7 +4,7 @@ namespace Albofish\Footstep;
 
 use Illuminate\Support\Facades\Facade;
 
-class FootprintsFacade extends Facade
+class FootstepFacade extends Facade
 {
     /**
      * Get the registered name of the component.
@@ -13,6 +13,6 @@ class FootprintsFacade extends Facade
      */
     protected static function getFacadeAccessor()
     {
-        return Footprints::class;
+        return Footstep::class;
     }
 }

@@ -2,10 +2,10 @@
 
 namespace Albofish\Footstep;
 
-class Footprints
+class Footstep
 {
     /**
-     * Create a new Footprints Instance.
+     * Create a new Footstep Instance.
      */
     public function __construct()
     {

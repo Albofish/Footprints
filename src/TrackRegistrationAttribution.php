@@ -13,7 +13,7 @@ trait TrackRegistrationAttribution
 {
     public static function bootTrackRegistrationAttribution()
     {
-        $footprints = app(Footprints::class);
+        $footstep = app(Footstep::class);
 
         // Add an observer that upon registration will automatically sync up prior visits.
         static::created(function (Model $model) {
@@ -28,7 +28,7 @@ trait TrackRegistrationAttribution
      */
     public function visits()
     {
-        return $this->hasMany(Visit::class, config('footprints.column_name'))->orderBy('created_at', 'desc');
+        return $this->hasMany(Visit::class, config('footstep.column_name'))->orderBy('created_at', 'desc');
     }
 
     /**
@@ -39,7 +39,7 @@ trait TrackRegistrationAttribution
     public function assignPreviousVisits()
     {
         return Visit::previousVisits()->update([
-            config('footprints.column_name') => $this->getKey(),
+            config('footstep.column_name') => $this->getKey(),
         ]);
     }
 

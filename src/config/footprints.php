@@ -60,7 +60,7 @@ return [
     | The name of the cookie that is set to keep track of attributions.
     |
     */
-    'cookie_name' => 'footprints',
+    'cookie_name' => 'footstep',
 
     /*
     |--------------------------------------------------------------------------
