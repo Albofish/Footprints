@@ -1,27 +1,26 @@
-# :feet: Footprints for Laravel 5.2+ (UTM and Referrer Tracking)
+# :feet: Footstep for Laravel 5.2+ (UTM and Referrer Tracking)
 
-![Footprints for Laravel 5.2+ (UTM and Referrer Tracking)](readme-header.jpg)
+![Footstep for Laravel 5.2+ (UTM and Referrer Tracking)](readme-header.jpg)
 
 [![Latest Version on Packagist][ico-version]][link-packagist]
 [![Software License][ico-license]](LICENSE.md)
-[![Build Status][ico-travis]][link-travis]
 [![Total Downloads][ico-downloads]][link-downloads]
 
 
-Footprints is a simple registration attribution tracking solution for Laravel 5.2+
+Footstep is a simple registration attribution tracking solution for Laravel 5.2+
 
 > “I know I waste half of my advertising dollars...I just wish I knew which half.” ~ *Henry Procter*.
 
 By tracking where user signups (or any other kind of registrations) originate from you can ensure that your marketing efforts are more focused.
 
-Footprints makes it easy to look back and see what lead to a user signing up. 
+Footstep makes it easy to look back and see what lead to a user signing up. 
 
 ## Install
 
 Via Composer
 
 ``` bash
-$ composer require kyranb/footprints
+$ composer require albofish/footstep dev-master
 ```
 
 Add the service provider and (optionally) alias to their relative arrays in config/app.php:
@@ -30,14 +29,14 @@ Add the service provider and (optionally) alias to their relative arrays in conf
 
     'providers' => [
         ...
-        Kyranb\Footprints\FootprintsServiceProvider::class,
+        Albofish\Footstep\FootstepServiceProvider::class,
     ],
 
 ...
 
     'aliases' => [
         ...
-        'Footprints'   => Kyranb\Footprints\FootprintsFacade::class,
+        'Footstep'   => Albofish\Footstep\FootstepFacade::class,
     ],
 
 ```
@@ -45,7 +44,7 @@ Add the service provider and (optionally) alias to their relative arrays in conf
 Publish the config and migration files:
 
 ``` php
-php artisan vendor:publish --provider="Kyranb\Footprints\FootprintsServiceProvider"
+php artisan vendor:publish --provider="Albofish\Footstep\FootstepServiceProvider"
 ```
 
 Add the ```TrackRegistrationAttribution``` trait to the model you wish to track attributions for. For example:
@@ -58,7 +57,7 @@ namespace App;
 
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
-use Kyranb\Footprints\TrackRegistrationAttribution;
+use Albofish\Footstep\TrackRegistrationAttribution;
 
 class User extends Model
 {
@@ -110,7 +109,7 @@ this boolean will allow you to write the tracking data to the db in your queue (
 
 ``` 'async' => true ```
 
-Add the `\Kyranb\Footprints\Middleware\CaptureAttributionDataMiddleware::class` middleware to `App\Http\Kernel.php` after the `EncryptCookie` middleware like so:
+Add the `\Albofish\Footstep\Middleware\CaptureAttributionDataMiddleware::class` middleware to `App\Http\Kernel.php` after the `EncryptCookie` middleware like so:
 
 ```php
     /**
@@ -123,16 +122,16 @@ Add the `\Kyranb\Footprints\Middleware\CaptureAttributionDataMiddleware::class` 
     protected $middleware = [
         \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,
         \App\Http\Middleware\EncryptCookies::class,
-        \Kyranb\Footprints\Middleware\CaptureAttributionDataMiddleware::class,
+        \Albofish\Footstep\Middleware\CaptureAttributionDataMiddleware::class,
     ];
 ```
 
 
 ## Usage
 
-#### How does Footprints work?
+#### How does Footstep work?
 
-Footprints tracks the UTM parameters and HTTP refererers from all requests to your application that are sent by un-authenticated uers. Not sure what UTM parameters are? [Wikipedia](https://en.wikipedia.org/wiki/UTM_parameters) has you covered:
+Footstep tracks the UTM parameters and HTTP refererers from all requests to your application that are sent by un-authenticated uers. Not sure what UTM parameters are? [Wikipedia](https://en.wikipedia.org/wiki/UTM_parameters) has you covered:
 
 > UTM parameters (UTM) is a shortcut for Urchin Traffic Monitor. This text tags allow users to track and analyze traffic sources in analytical tools (f.e. Google Analytics). By adding UTM parameters to URLs, you can identify the source and campaigns that send traffic to your website. When a user clicks a referral link / ad or banner, these parameters are sent to Google Analytics (or other analytical tool), so you can see the effectiveness of each campaign in your reports
 
@@ -204,13 +203,11 @@ If you run into any issues, have suggestions or would like to expand this packag
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
 
-[ico-version]: https://img.shields.io/packagist/v/kyranb/footprints.svg?style=flat-square
+[ico-version]: https://img.shields.io/packagist/v/albofish/footstep.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/kyranb/footprints/master.svg?style=flat-square
-[ico-downloads]: https://img.shields.io/packagist/dt/kyranb/footprints.svg?style=flat-square
+[ico-downloads]: https://img.shields.io/packagist/dt/albofish/footstep.svg?style=flat-square
 
-[link-packagist]: https://packagist.org/packages/kyranb/footprints
-[link-travis]: https://travis-ci.org/kyranb/footprints
-[link-downloads]: https://packagist.org/packages/kyranb/footprints
-[link-author]: https://github.com/kyranb
+[link-packagist]: https://packagist.org/packages/albofish/footstep
+[link-downloads]: https://packagist.org/packages/albofish/footstep
+[link-author]: https://github.com/albofish
 [link-contributors]: ../../contributors
