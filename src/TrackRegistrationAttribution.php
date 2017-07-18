@@ -18,6 +18,7 @@ trait TrackRegistrationAttribution
         // Add an observer that upon registration will automatically sync up prior visits.
         static::created(function (Model $model) {
             $model->assignPreviousVisits();
+            $model->deleteUsedCookie();
         });
     }
 
@@ -41,6 +42,17 @@ trait TrackRegistrationAttribution
         return Visit::previousVisits()->update([
             config('footstep.column_name') => $this->getKey(),
         ]);
+    }
+
+    /**
+     * Remove the cookie now that the tracked event has happened
+     *
+     * @return null
+     */
+    public function deleteUsedCookie()
+    {
+      // We are not able to assign the cookie to a response at this point, so add to queue instead.
+      \Cookie::queue(\Cookie::forget(config('footstep.cookie_name')));
     }
 
     /**
