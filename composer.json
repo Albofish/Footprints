@@ -1,5 +1,5 @@
 {
-    "name": "kyranb/footprints",
+    "name": "albofish/footstep",
     "type": "library",
     "description": "A simple registration attribution tracking solution for Laravel 5.2+ (UTM Parameters and Referrers)",
     "keywords": [
@@ -8,14 +8,19 @@
         "utm",
         "utm parameters",
         "user tracking",
-        "attribution tracking"
+        "attribution tracking",
+        "footstep"
     ],
-    "homepage": "https://github.com/kyranb/footprints",
+    "homepage": "https://github.com/albofish/footstep",
     "license": "MIT",
     "authors": [
         {
             "name": "Kyran Beasley",
             "email": "kyranbeasley@gmail.com"
+        },
+        {
+            "name": "Alex Hollyman",
+            "email": "alex.hollyman@gmail.com"
         }
     ],
     "require": {
@@ -30,12 +35,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Kyranb\\Footprints\\": "src/"
+            "Albofish\\Footstep\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Kyranb\\Footprints\\Test\\": "tests"
+            "Albofish\\Footstep\\Test\\": "tests"
         }
     },
     "scripts": {
