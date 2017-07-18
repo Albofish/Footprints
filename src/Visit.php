@@ -27,7 +27,8 @@ class Visit extends Model
      * @var array
      */
     protected $dates = [
-        'created_at', 'updated_at',
+        'created_at',
+        'updated_at',
     ];
 
 
@@ -46,11 +47,10 @@ class Visit extends Model
         $this->setTable(config('footstep.table_name'));
 
         if (config('footstep.connection_name')) {
-            
+
             $this->setConnection(config('footstep.connection_name'));
         }
     }
-
 
 
     /**
@@ -71,5 +71,15 @@ class Visit extends Model
     public function scopePreviousVisits($query)
     {
         return $query->where('cookie_token', Cookie::get(config('footstep.cookie_name')));
+    }
+
+    /**
+     * Scope a query to only include previous visits that have been unassigned.
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeUnassignedPreviousVisits($query)
+    {
+        return $query->whereNull(config('footstep.column_name'))->where('cookie_token', Cookie::get(config('footstep.cookie_name')));
     }
 }
